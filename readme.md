@@ -18,6 +18,14 @@ chave: pix@bideaz.in
 
 Para acessar o QR code do PIX, visite: [https://www.bideaz.com.br/pix](https://www.bideaz.com.br/pix)
 
+### 💳 PayPal
+
+Também é possível fazer uma doação via PayPal usando o mesmo e-mail:
+
+```
+pix@bideaz.in
+```
+
 Qualquer valor é bem-vindo e me ajuda a manter projetos de código aberto como este!
 
 <p align="center">
