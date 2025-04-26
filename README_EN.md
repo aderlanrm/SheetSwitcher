@@ -10,23 +10,23 @@
 
 If you found this project useful and it helped you create more dynamic dashboards in Qlik Sense, consider buying me a coffee!
 
+### 💳 PayPal
+
+You can make a donation via PayPal using the following email:
+
+```
+pix@bideaz.in
+```
+
 ### 💰 PIX
 
-You can make a donation via PIX (Brazilian payment system) to support the continuous development of this and other Qlik Sense extensions:
+You can also use PIX (Brazilian payment system) to support the continuous development of this and other Qlik Sense extensions:
 
 ```
 key: pix@bideaz.in
 ```
 
 To access the PIX QR code, visit: [https://www.bideaz.com.br/pix](https://www.bideaz.com.br/pix)
-
-### 💳 PayPal
-
-You can also make a donation via PayPal using the same email:
-
-```
-pix@bideaz.in
-```
 
 Any amount is welcome and helps me maintain open source projects like this one!
 
