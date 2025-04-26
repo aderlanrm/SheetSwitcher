@@ -4,9 +4,37 @@
 **Autor:** Aderlan | bideaz.in  
 **Licença:** MIT
 
+## ☕ Apoie este Projeto
+
+Se você achou este projeto útil e ele te ajudou a criar dashboards mais dinâmicos no Qlik Sense, considere me pagar um café! 
+
+### 💰 PIX
+
+Você pode fazer uma doação via PIX para apoiar o desenvolvimento contínuo desta e outras extensões para Qlik Sense:
+
+```
+chave: pix@bideaz.in
+```
+
+Qualquer valor é bem-vindo e me ajuda a manter projetos de código aberto como este!
+
+<p align="center">
+🙏 Sua contribuição faz a diferença! 🙏
+</p>
+
 ## Visão Geral
 
 A extensão **SheetSwitcher** permite alternar automaticamente entre pastas (sheets) no Qlik Sense, com funcionalidades de controle de tempo, efeitos visuais, tela cheia e personalização completa da interface.
+
+### 💯 Compatibilidade Universal
+
+- ✅ **Funciona em qualquer navegador** compatível com Qlik Sense (Chrome, Firefox, Edge, Safari)
+- ✅ **Sem necessidade de extensões de navegador** ou complementos adicionais
+- ✅ **Compatível com todas as versões do Qlik Sense:**
+  - Qlik Sense Cloud
+  - Qlik Sense Enterprise
+  - Qlik Sense Desktop 
+- ✅ **Plug & Play:** instale e use imediatamente, sem configurações complexas
 
 ## Funcionalidades
 
@@ -112,24 +140,6 @@ git clone https://github.com/aderlanrm/SheetSwitcher.git
 ## Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
-
-## ☕ Apoie este Projeto
-
-Se você achou este projeto útil e ele te ajudou a criar dashboards mais dinâmicos no Qlik Sense, considere me pagar um café! 
-
-### 💰 PIX
-
-Você pode fazer uma doação via PIX para apoiar o desenvolvimento contínuo desta e outras extensões para Qlik Sense:
-
-```
-chave: pix@bideaz.in
-```
-
-Qualquer valor é bem-vindo e me ajuda a manter projetos de código aberto como este!
-
-<p align="center">
-🙏 Sua contribuição faz a diferença! 🙏
-</p>
 
 ## Licença
 
