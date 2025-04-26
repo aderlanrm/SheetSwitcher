@@ -4,6 +4,8 @@
 **Autor:** Aderlan | bideaz.in  
 **Licença:** MIT
 
+*Read this in [English](README_EN.md)*
+
 ## ☕ Apoie este Projeto
 
 Se você achou este projeto útil e ele te ajudou a criar dashboards mais dinâmicos no Qlik Sense, considere me pagar um café! 
