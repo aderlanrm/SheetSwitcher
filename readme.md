@@ -116,3 +116,16 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar
 ## Licença
 
 MIT License - Use livremente em seus projetos
+
+### Licença MIT Explicada de Forma Simples
+
+A licença MIT é como uma regra legal para compartilhar este programa. Imagine que você criou um brinquedo incrível e decidiu compartilhar com seus amigos. A licença MIT é como dizer:
+
+- ✅ Você pode usar meu brinquedo como quiser
+- ✅ Você pode modificar meu brinquedo (adicionar mais peças ou mudar as cores)
+- ✅ Você pode compartilhar o brinquedo com outros amigos
+- ✅ Você pode até usar o brinquedo para criar um projeto na feira de ciências da escola
+
+A única condição é que você mantenha o pequeno cartão que diz quem criou o brinquedo originalmente. Isso é para que todos saibam de onde o brinquedo veio, mesmo depois de muitas pessoas terem brincado com ele!
+
+E o melhor de tudo: se algo quebrar enquanto você estiver brincando, não é culpa de quem criou o brinquedo! Cada um é responsável pela forma como usa.
