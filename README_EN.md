@@ -4,7 +4,7 @@
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 
-*Leia isto em [Português](readme.md)*
+*Leia isto em [Português](readme.md) | Lea esto en [Español](README_ES.md) | Read this in [English](README_EN.md)*
 
 ## ☕ Support this Project
 
