@@ -1,6 +1,6 @@
 # Extensión SheetSwitcher para Qlik Sense
 
-**Versión:** 1.0.0  
+**Versión:** 1.1.3  
 **Autor:** Aderlan | bideaz.in  
 **Licencia:** MIT
 
@@ -80,6 +80,7 @@ La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas (sh
 
 - 🔄 **Navegación:**
   - Cambio automático de hojas
+  - **Navegación inteligente:** omite hojas ocultas, respetando solo hojas visibles
   - Bucle continuo al llegar al final
   - Modo pantalla completa opcional (F11)
   - Temporizador sincronizado entre hojas

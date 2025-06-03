@@ -1,6 +1,6 @@
 # SheetSwitcher Qlik Sense Extension
 
-**Version:** 1.0.0  
+**Version:** 1.1.3  
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 
@@ -80,6 +80,7 @@ The **SheetSwitcher** extension allows you to automatically switch between sheet
 
 - 🔄 **Navigation:**
   - Automatic sheet switching
+  - **Smart navigation:** skips hidden sheets, respecting only visible sheets
   - Continuous loop when reaching the end
   - Optional full screen mode (F11)
   - Timer synchronized between sheets

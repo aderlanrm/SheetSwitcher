@@ -1,12 +1,51 @@
-# SheetSwitcher Qlik Sense Extension
+# SheetSwitcher
 
-**Versão:** 1.0.0  
-**Autor:** Aderlan | bideaz.in  
-**Licença:** MIT
+Extensão para Qlik Sense que permite a alternância automática entre abas (sheets) com controle de tempo personalizável.
 
-*Read this in [English](README_EN.md) | Lea esto en [Español](README_ES.md)*
+## Características
 
-## ☕ Apoie este Projeto
+- **Navegação Automática**: Alterna automaticamente entre as abas em intervalos definidos
+- **Controle Manual**: Botões para iniciar/parar a apresentação
+- **Tela Cheia**: Opção para ativar modo tela cheia durante a apresentação
+- **Interface Minimalista**: Timer compacto que pode ser minimizado e arrastado
+- **Personalização Visual**: Estilos customizáveis para diferentes elementos
+
+## Instalação
+
+1. Baixe os arquivos da extensão
+2. Coloque na pasta de extensões do Qlik Sense: 
+   `C:\Users\[usuario]\Documents\Qlik\Sense\Extensions\SheetSwitcher\`
+3. Reinicie o Qlik Sense Desktop ou atualize o browser no Qlik Sense Server
+
+## Como Usar
+
+1. Adicione a extensão SheetSwitcher em uma das suas sheets
+2. Configure o tempo desejado entre as alternâncias (em segundos)
+3. Ative/desative a opção de tela cheia conforme necessário
+4. Clique em "Iniciar" para começar a apresentação automática
+5. Use o timer no topo da tela para controlar a apresentação
+
+## Configurações
+
+- **Intervalo**: Tempo em segundos entre cada mudança de aba
+- **Tela Cheia**: Ativa/desativa o modo tela cheia automático
+- **Estilos**: Personalização de cores e fontes para diferentes elementos
+
+## Funcionalidades
+
+- Timer visível com contagem regressiva
+- Navegação automática entre sheets
+- Controle de tela cheia integrado
+- Interface arrastável e minimizável
+- Pausa e retomada da apresentação
+
+## Versão
+
+Versão atual: 1.0.0
+
+## Autor
+
+Aderlan | [bideaz.in](https://www.bideaz.com.br)
 
 Se você achou este projeto útil e ele te ajudou a criar dashboards mais dinâmicos no Qlik Sense, considere me pagar um café! 
 
@@ -80,6 +119,7 @@ A extensão **SheetSwitcher** permite alternar automaticamente entre pastas (she
 
 - 🔄 **Navegação:**
   - Troca automática de pastas
+  - **Navegação inteligente:** pula pastas ocultas, respeitando apenas sheets visíveis
   - Loop contínuo ao chegar ao final
   - Modo tela cheia opcional (F11)
   - Timer sincronizado entre pastas

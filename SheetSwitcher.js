@@ -7,6 +7,9 @@ define([
   // Injeta CSS personalizado
   $("<style>").html(cssContent).appendTo("head");
 
+  // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
+  var EXTENSION_VERSION = "1.0.0";
+
   // Configuração global
   if (!window.sheetSwitcherConfig) {
     window.sheetSwitcherConfig = {
@@ -164,7 +167,7 @@ define([
 
     // Título sempre com a mesma cor
     $('#sheetSwitcherTitle')
-      .text(cfg.minimized ? formatTime(cfg.remainingTime) : 'Timer')
+      .text(cfg.minimized ? formatTime(cfg.remainingTime) : 'Timer v' + EXTENSION_VERSION)
       .css({
         'color': cfg.styles.header.color,
         'font-size': cfg.styles.header.fontSize,
