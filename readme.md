@@ -41,7 +41,7 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (she
 
 ## Versão
 
-Versão atual: 1.0.0
+Versão atual: 1.1.3
 
 ## Autor
 

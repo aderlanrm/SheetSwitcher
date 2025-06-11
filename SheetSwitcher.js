@@ -8,7 +8,7 @@ define([
   $("<style>").html(cssContent).appendTo("head");
 
   // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
-  var EXTENSION_VERSION = "1.0.0";
+  var EXTENSION_VERSION = "1.1.3";
 
   // Configuração global
   if (!window.sheetSwitcherConfig) {
