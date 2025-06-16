@@ -8,6 +8,7 @@ define([
   $("<style>").html(cssContent).appendTo("head");
 
   // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
+  var EXTENSION_NAME = "SheetSwitcher";
   var EXTENSION_VERSION = "1.1.3";
 
   // Configuração global
@@ -167,7 +168,7 @@ define([
 
     // Título sempre com a mesma cor
     $('#sheetSwitcherTitle')
-      .text(cfg.minimized ? formatTime(cfg.remainingTime) : 'Timer v' + EXTENSION_VERSION)
+      .text(cfg.minimized ? formatTime(cfg.remainingTime) : 'Timer')
       .css({
         'color': cfg.styles.header.color,
         'font-size': cfg.styles.header.fontSize,
@@ -183,7 +184,8 @@ define([
       + 'background:' + cfg.styles.container.background + ';">'
       + btnText + '</button>'
       + '<span style="margin:0 10px;">' 
-      + formatTime(cfg.remainingTime) + ' para próxima página</span>';
+      + formatTime(cfg.remainingTime) + ' para próxima página.</span>'
+      + '<div style="text-align:center; margin:5px 0;">' + EXTENSION_NAME + ' v' + EXTENSION_VERSION + '</div>';
     $('#sheetSwitcherGlobalContent').html(contentHtml);
 
     // Modifica o evento de clique do botão
