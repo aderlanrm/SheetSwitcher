@@ -1,6 +1,6 @@
 # SheetSwitcher Qlik Sense Extension
 
-**Version:** 1.1.3  
+**Version:** 1.4.2  
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 
@@ -36,7 +36,7 @@ Any amount is welcome and helps me maintain open source projects like this one!
 
 ## Overview
 
-The **SheetSwitcher** extension allows you to automatically switch between sheets in Qlik Sense, with time control features, visual effects, full screen mode, and complete interface customization.
+The **SheetSwitcher** extension allows you to automatically switch between sheets in Qlik Sense or navigate to a specific configured link, with time control features, F11 fullscreen simulation, and complete interface customization.
 
 ### 💯 Universal Compatibility
 
@@ -53,8 +53,8 @@ The **SheetSwitcher** extension allows you to automatically switch between sheet
 - ⏱️ **Global Timer:**
   - Configurable interval per sheet
   - Countdown timer in MM:SS format
-  - Maintains last settings between sheets
-  - Settings persist even without an instance
+  - Continuous timer that doesn't pause when tab loses focus
+  - Starts minimized by default
 
 - 🎮 **Controls:**
   - Start/Stop button with visual feedback
@@ -66,24 +66,15 @@ The **SheetSwitcher** extension allows you to automatically switch between sheet
   - Global control box always visible
   - Initial position centered at the top
   - Minimalist timer when minimized
-  - Hover effect on title
-  - Smooth rounding and shadows
+  - Discreet interface that starts minimized
   - Pointer cursor for better usability
 
-- 🎨 **Customization:**
-  - Fully configurable colors and fonts
-  - Separate styles for:
-    - Object instance
-    - Control box
-    - Title/Timer
-  - Custom style persistence
-
 - 🔄 **Navigation:**
-  - Automatic sheet switching
-  - **Smart navigation:** skips hidden sheets, respecting only visible sheets
+  - Automatic sheet switching (sheet mode)
+  - Navigation to single link in same tab (link mode)
   - Continuous loop when reaching the end
-  - Optional full screen mode (F11)
-  - Timer synchronized between sheets
+  - Fullscreen mode via F11 simulation
+  - Timer synchronized across contexts
 
 ## File Structure
 
@@ -98,8 +89,12 @@ SheetSwitcher/
 ## Configurable Properties
 
 ### Settings
-- **Interval (seconds):** time between sheet changes
-- **Full screen (F11):** enable/disable automatic full screen mode
+- **Interval (seconds):** time between sheet changes or link reload
+- **Full screen (F11):** simulates F11 key to enable/disable fullscreen mode
+- **Auto-start always:** automatically starts when loading the page
+
+### Link Navigation
+- **Link URL:** single URL for automatic navigation in the same tab
 
 ### Styles
 #### Instance

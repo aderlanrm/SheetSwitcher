@@ -1,6 +1,6 @@
 # Extensión SheetSwitcher para Qlik Sense
 
-**Versión:** 1.1.3  
+**Versión:** 1.4.2  
 **Autor:** Aderlan | bideaz.in  
 **Licencia:** MIT
 
@@ -36,7 +36,7 @@ Para acceder al código QR de PIX, visita: [https://www.bideaz.com.br/pix](https
 
 ## Visión General
 
-La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas (sheets) en Qlik Sense, con funcionalidades de control de tiempo, efectos visuales, modo pantalla completa y personalización completa de la interfaz.
+La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas en Qlik Sense o navegar a un enlace específico configurado, con funcionalidades de control de tiempo, simulación de pantalla completa F11 y personalización completa de la interfaz.
 
 ### 💯 Compatibilidad Universal
 
@@ -53,8 +53,8 @@ La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas (sh
 - ⏱️ **Temporizador Global:**
   - Intervalo configurable por hoja
   - Cuenta regresiva en formato MM:SS
-  - Mantiene la última configuración entre hojas
-  - Configuraciones persisten incluso sin instancia
+  - Temporizador continuo que no se pausa cuando la pestaña pierde el foco
+  - Inicia minimizado por defecto
 
 - 🎮 **Controles:**
   - Botón Iniciar/Detener con feedback visual
@@ -66,24 +66,15 @@ La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas (sh
   - Caja de control global siempre visible
   - Posición inicial centrada en la parte superior
   - Temporizador minimalista cuando está minimizado
-  - Efecto hover en el título
-  - Redondeo y sombreado suaves
+  - Interfaz discreta que inicia minimizada
   - Cursor pointer para mejor usabilidad
 
-- 🎨 **Personalización:**
-  - Colores y fuentes totalmente configurables
-  - Estilos separados para:
-    - Instancia del objeto
-    - Caja de control
-    - Título/Temporizador
-  - Persistencia de estilos personalizados
-
 - 🔄 **Navegación:**
-  - Cambio automático de hojas
-  - **Navegación inteligente:** omite hojas ocultas, respetando solo hojas visibles
+  - Cambio automático de hojas (modo hojas)
+  - Navegación a enlace único en la misma pestaña (modo enlace)
   - Bucle continuo al llegar al final
-  - Modo pantalla completa opcional (F11)
-  - Temporizador sincronizado entre hojas
+  - Modo pantalla completa vía simulación F11
+  - Temporizador sincronizado entre contextos
 
 ## Estructura de Archivos
 
@@ -98,8 +89,12 @@ SheetSwitcher/
 ## Propiedades Configurables
 
 ### Configuración
-- **Intervalo (segundos):** tiempo entre cambios de hoja
-- **Pantalla completa (F11):** activa/desactiva modo pantalla completa automático
+- **Intervalo (segundos):** tiempo entre cambios de hoja o recarga de enlace
+- **Pantalla completa (F11):** simula la tecla F11 para activar/desactivar modo pantalla completa
+- **Iniciar automáticamente siempre:** inicia automáticamente al cargar la página
+
+### Navegación por Enlace
+- **URL del Enlace:** URL única para navegación automática en la misma pestaña
 
 ### Estilos
 #### Instancia

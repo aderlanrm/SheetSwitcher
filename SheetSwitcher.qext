@@ -1,14 +1,14 @@
 {
 	"name": "SheetSwitcher",
-	"description": "Alterna entre abas de forma automática",
+	"description": "Alterna entre abas de forma automática ou entre links configurados",
 	"type": "visualization",
-	"version": "1.1.3",
+	"version": "1.4.2",
 	"icon": "extension",
 	"author": "Aderlan | bideaz.in",
 	"homepage": "https://www.bideaz.com.br",
 	"keywords": "qlik-sense, visualization",
 	"license": "MIT",
-	"repository": "",
+	"repository": "https://github.com/aderlanrm/SheetSwitcher",
 	"dependencies": {
 		"qlik-sense": ">=3.0.x"
 	}
