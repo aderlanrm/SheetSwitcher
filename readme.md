@@ -1,5 +1,7 @@
 # SheetSwitcher
 
+*Leia isto em [Português](readme.md) | Lea esto en [Español](README_ES.md) | Read this in [English](README_EN.md)*
+
 Extensão para Qlik Sense que permite a alternância automática entre abas (pastas) locais ou navegação para link específico configurado.
 
 ## Características
