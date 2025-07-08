@@ -43,6 +43,8 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (pas
 - **Intervalo**: Tempo em segundos entre cada mudança de pasta/link
 - **Tela Cheia (F11)**: Simula a tecla F11 para ativar/desativar modo tela cheia
 - **Iniciar automaticamente sempre**: Inicia automaticamente ao carregar a página
+- **Clicar botões animator**: Clica automaticamente em botões animator ao iniciar o timer
+- **Clicar botões animator**: Clica automaticamente em botões com ID contendo "qlik-animator-start-button" ao iniciar o timer
 
 ### Link de Navegação
 - **Link URL**: Campo de texto para inserir uma URL específica
@@ -65,7 +67,21 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (pas
 
 ## Versão
 
-Versão atual: 1.4.2
+Versão atual: 1.4.4
+
+### Changelog v1.4.4
+- ✨ **Nova funcionalidade**: Opção para clicar automaticamente em botões animator
+- 🔧 **Configuração**: Novo checkbox "Clicar botões animator" nas configurações
+- 🎯 **Automação**: Busca e clica em elementos com ID contendo "qlik-animator-start-button"
+- 📋 **Logs melhorados**: Logs detalhados mostrando todos os IDs encontrados
+- ⏱️ **Delay otimizado**: Delay de 150ms entre cliques para melhor estabilidade
+- 🔍 **Busca robusta**: Suporte para IDs complexos em qualquer posição
+
+### Changelog v1.4.3
+- ✨ **Nova funcionalidade**: Opção para clicar automaticamente em botões animator
+- 🔧 **Configuração**: Novo checkbox "Clicar botões animator" nas configurações
+- 🎯 **Automação**: Busca e clica em elementos com classe `.qlik-animator-start-button`
+- 📋 **Interface**: Indicador visual quando a funcionalidade está ativa
 
 ### Changelog v1.4.2
 - 🔧 **Melhoria de UX**: Timer agora inicia minimizado por padrão
@@ -198,6 +214,7 @@ SheetSwitcher/
 - **Intervalo (segundos):** tempo entre trocas de pasta ou recarregamento de link
 - **Tela cheia (F11):** simula tecla F11 para ativar/desativar modo tela cheia
 - **Iniciar automaticamente sempre:** inicia automaticamente ao carregar a página
+- **Clicar botões animator:** clica automaticamente em botões animator ao iniciar timer
 
 ### Link de Navegação
 - **Link URL:** URL única para navegação automática na mesma aba

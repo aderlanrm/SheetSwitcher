@@ -7,7 +7,7 @@ define([
   $("<style>").html(cssContent).appendTo("head");
   // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
   var EXTENSION_NAME = "SheetSwitcher";
-  var EXTENSION_VERSION = "1.4.2";  // Configuração global 
+  var EXTENSION_VERSION = "1.4.4";  // Configuração global 
   if (!window.sheetSwitcherConfig) {
     window.sheetSwitcherConfig = {
       isPlaying: false,
@@ -19,6 +19,7 @@ define([
       minimized: true, // Inicia minimizada por padrão
       link: '', // Um único link ao invés de array
       autoStartAlways: true, // Nova configuração para iniciar automaticamente
+      clickAnimatorButtons: false, // Nova configuração para clicar em botões animator
       isTabActive: true, // Controla se esta aba está ativa
       pausedByNavigation: false, // Pausado devido à navegação para nova aba
       visibilitySetup: false, // Controla se os listeners já foram configurados
@@ -74,7 +75,43 @@ define([
   function formatTime(sec) {
     var m = Math.floor(sec / 60), s = sec % 60;
     return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-  }  // Navega para próximo item (sheet ou link)
+  }  // Função para clicar em todos os botões com ID que contenha qlik-animator-start-button
+  function clickAnimatorButtons() {
+    var cfg = window.sheetSwitcherConfig;
+    
+    if (cfg.clickAnimatorButtons) {
+      try {
+        // Busca por elementos com ID que contenha "qlik-animator-start-button" em qualquer posição
+        var animatorButtons = document.querySelectorAll('[id*="qlik-animator-start-button"]');
+        console.log('SheetSwitcher: Encontrados', animatorButtons.length, 'botões animator com ID contendo "qlik-animator-start-button"');
+        
+        // Se não encontrou por ID, tenta buscar por classe também como fallback
+        if (animatorButtons.length === 0) {
+          animatorButtons = document.querySelectorAll('.qlik-animator-start-button');
+          console.log('SheetSwitcher: Fallback - Encontrados', animatorButtons.length, 'botões animator por classe');
+        }
+        
+        if (animatorButtons.length > 0) {
+          console.log('SheetSwitcher: IDs encontrados:', Array.from(animatorButtons).map(function(btn) { return btn.id || 'sem ID'; }));
+          
+          animatorButtons.forEach(function(button, index) {
+            setTimeout(function() {
+              if (button && typeof button.click === 'function') {
+                button.click();
+                console.log('SheetSwitcher: Clicado no botão animator', index + 1, '(ID:', button.id || 'sem ID', ')');
+              }
+            }, index * 150); // Aumentei o delay para 150ms entre cliques
+          });
+        } else {
+          console.log('SheetSwitcher: Nenhum botão animator encontrado na página');
+        }
+      } catch (error) {
+        console.log('SheetSwitcher: Erro ao clicar em botões animator:', error.message);
+      }
+    }
+  }
+
+  // Navega para próximo item (sheet ou link)
   function navigateToNext() {
     var cfg = window.sheetSwitcherConfig;
     
@@ -146,6 +183,15 @@ define([
           console.log('SheetSwitcher: Erro ao simular F11');
         }
       });
+    }
+    
+    // Clica nos botões animator se configurado (apenas quando o timer inicia)
+    if (cfg.clickAnimatorButtons) {
+      console.log('SheetSwitcher: Clicando em botões animator ao iniciar timer');
+      // Delay para garantir que a página esteja carregada
+      setTimeout(function() {
+        clickAnimatorButtons();
+      }, 500);
     }
     
     cfg.timer = setInterval(function () {
@@ -412,6 +458,12 @@ define([
               label: 'Iniciar automaticamente',
               type: 'boolean',
               defaultValue: true
+            },
+            clickAnimatorButtons: {
+              ref: 'props.clickAnimatorButtons',
+              label: 'Clicar botões animator',
+              type: 'boolean',
+              defaultValue: false
             }
           }
         },
@@ -516,6 +568,7 @@ define([
       var cfg = window.sheetSwitcherConfig;
       cfg.fullscreen = layout.props.fullscreen !== false;  // default true
       cfg.autoStartAlways = layout.props.autoStartAlways !== false; // default true
+      cfg.clickAnimatorButtons = layout.props.clickAnimatorButtons === true; // default false
       
       // Processa link único
       cfg.link = (layout.props.link || '').trim();
@@ -577,12 +630,18 @@ define([
         }
       }
       
+      // Informações sobre botões animator
+      var infoAnimator = '';
+      if (cfg.clickAnimatorButtons) {
+        infoAnimator = '<br><small style="color:green;">ℹ️ Clicando em botões animator ao iniciar</small>';
+      }
+      
       var localHtml = '<div style="padding:10px; ' +
         'font-size:' + st.instance.fontSize + '; ' +
         'color:' + st.instance.color + '; ' +
         'background:' + st.instance.background + ';">' +
         'Tempo configurado: ' + cfg.tempo + ' segundos.<br>' +
-        'Modo: ' + modoNavegacao + '.' + infoAbas + infoContexto +
+        'Modo: ' + modoNavegacao + '.' + infoAbas + infoContexto + infoAnimator +
         '</div>';
       $element.html(localHtml);
       return qlik.Promise.resolve();

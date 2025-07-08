@@ -1,6 +1,6 @@
 # SheetSwitcher Qlik Sense Extension
 
-**Version:** 1.4.2  
+**Version:** 1.4.4  
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 
@@ -92,6 +92,7 @@ SheetSwitcher/
 - **Interval (seconds):** time between sheet changes or link reload
 - **Full screen (F11):** simulates F11 key to enable/disable fullscreen mode
 - **Auto-start always:** automatically starts when loading the page
+- **Click animator buttons:** automatically clicks animator buttons when starting timer
 
 ### Link Navigation
 - **Link URL:** single URL for automatic navigation in the same tab
