@@ -300,13 +300,16 @@ define([
       fullscreenInitiatedByExtension: false, // Flag para indicar que o fullscreen foi iniciado pela extensão
       styles: {
         instance: { fontSize: '12px', color: 'rgba(0,0,0,1)', background: 'rgba(255,255,255,1)' },
-        container: { fontSize: '13px', color: 'rgba(0,0,0,1)', background: 'rgba(255,255,255,1)' },
+        container: { fontSize: '12px', color: 'rgba(0,0,0,1)', background: 'rgba(255,255,255,1)' },
         header:    { fontSize: '14px', color: 'rgba(51,51,51,1)', background: 'rgba(238,238,238,1)' }
       }
-    };  }
+    };
+  }
   // Controle de visibilidade da aba (simplificado - não pausa timer)
   function setupTabVisibilityControl() {
-    var cfg = window.sheetSwitcherConfig;    // Listener para mudança de visibilidade da página (apenas para log)
+    var cfg = window.sheetSwitcherConfig;
+    
+    // Listener para mudança de visibilidade da página (apenas para log)
     document.addEventListener('visibilitychange', function() {
       cfg.isTabActive = !document.hidden;
       console.log('SheetSwitcher: Visibilidade mudou - isTabActive:', cfg.isTabActive);
@@ -316,7 +319,9 @@ define([
     // Listener para foco da janela (apenas para controle de estado)
     window.addEventListener('focus', function() {
       cfg.isTabActive = true;
-    });    window.addEventListener('blur', function() {
+    });
+    
+    window.addEventListener('blur', function() {
       cfg.isTabActive = false;
     });
   }
@@ -346,7 +351,9 @@ define([
   function formatTime(sec) {
     var m = Math.floor(sec / 60), s = sec % 60;
     return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-  }  // Função para clicar em todos os botões com ID que contenha qlik-animator-start-button
+  }
+  
+  // Função para clicar em todos os botões com ID que contenha qlik-animator-start-button
   function clickAnimatorButtons() {
     var cfg = window.sheetSwitcherConfig;
     
@@ -393,7 +400,9 @@ define([
       // Navegação padrão entre pastas locais
       qlik.navigation.nextSheet();
     }
-  }  // Navega para o link na mesma aba
+  }
+  
+  // Navega para o link na mesma aba
   function openOrSwitchToTab(url) {
     var cfg = window.sheetSwitcherConfig;
     
@@ -419,6 +428,7 @@ define([
       }, 500);
     }
   }
+  
   // Inicia timer automático baseado nas configurações
   function checkAutoStart() {
     var cfg = window.sheetSwitcherConfig;
@@ -440,7 +450,9 @@ define([
         renderGlobal();
       }, 1000); // Delay de 1 segundo para garantir que a página carregou
     }
-  }// Inicia/Reinicia timer global
+  }
+
+  // Inicia/Reinicia timer global
   function startTimer() {
     var cfg = window.sheetSwitcherConfig;
     
@@ -476,7 +488,9 @@ define([
       }
       renderGlobal();
     }, 1000);
-  }// Alterna fullscreen simulando tecla F11
+  }
+
+  // Alterna fullscreen simulando tecla F11
   function toggleFullscreen(enable) {
     var cfg = window.sheetSwitcherConfig;
     
@@ -654,17 +668,19 @@ define([
     $('#sheetSwitcherGlobalHeader').css({
       'background-color': cfg.styles.header.background,
       'transition': 'background-color 0.2s'
-    }).hover(
+    }    ).hover(
       function() { $(this).css('background-color', 'rgba(0,0,0,0.1)'); },
       function() { $(this).css('background-color', cfg.styles.header.background); }
-    );    // Título sempre com a mesma cor
+    );
+    
+    // Título sempre com a mesma cor
     $('#sheetSwitcherTitle')
       .text(cfg.minimized ? formatTime(cfg.remainingTime) : getText('timer'))
       .css({
         'color': cfg.styles.header.color,
         'font-size': cfg.styles.header.fontSize,
         'font-weight': 'bold'
-      });      // Conteúdo interno
+      });// Conteúdo interno
     var btnText = cfg.isPlaying ? getText('stop') : getText('start');
     var modoAtual = cfg.link ? ' (' + getText('link') + ')' : ' (' + getText('sheet') + ')';
     var proximoTexto = cfg.link ? 
@@ -690,7 +706,9 @@ define([
     $('#sheetSwitcherGlobalContent').html(contentHtml);
 
     // Controla a visibilidade do conteúdo baseado no estado minimized
-    $('#sheetSwitcherGlobalContent').toggle(!cfg.minimized);    // Modifica o evento de clique do botão
+    $('#sheetSwitcherGlobalContent').toggle(!cfg.minimized);
+    
+    // Modifica o evento de clique do botão
     $('#sheetSwitcherGlobalBtn').off('click').on('click', function () {
       if (!cfg.isPlaying) {
         cfg.isPlaying = true;
@@ -710,7 +728,8 @@ define([
             if (!success) {
               console.log('SheetSwitcher: Erro ao sair do fullscreen');
             }
-          });        }
+          });
+        }
       }
       renderGlobal();
     });
@@ -810,7 +829,7 @@ define([
                   ref: 'props.styles.container.fontSize',
                   label: 'Fonte (Caixa)',
                   type: 'string',
-                  defaultValue: '13px'
+                  defaultValue: '12px'
                 },
                 color: {
                   ref: 'props.styles.container.color',
