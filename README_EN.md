@@ -1,6 +1,6 @@
 # SheetSwitcher Qlik Sense Extension
 
-**Version:** 1.4.6  
+**Version:** 1.4.7  
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 
@@ -68,6 +68,7 @@ The **SheetSwitcher** extension allows you to automatically switch between sheet
   - Minimalist timer when minimized
   - Discreet interface that starts minimized
   - Pointer cursor for better usability
+  - 🌍 **Multilingual Support:** Automatic interface in Portuguese, English or Spanish based on Qlik Sense language settings
 
 - 🔄 **Navigation:**
   - Automatic sheet switching (sheet mode)
@@ -149,6 +150,25 @@ git clone https://github.com/aderlanrm/SheetSwitcher.git
 ## Contribution
 
 Contributions are welcome! Feel free to open issues or send pull requests.
+
+## Version History
+
+### Version 1.4.7
+- 🌍 **Multilingual Support**: Automatic interface in Portuguese, English or Spanish
+- 🔧 **Language Detection**: Automatically detects language configured in Qlik Sense
+- 🌐 **Complete Translation**: All interface strings translated in three languages  
+- 📋 **Qlik Sense API**: Uses `getLocaleInfo()` to detect locale configuration
+
+### Version 1.4.6
+- 🔧 **Default Configuration**: "Show Timer" now comes enabled by default
+- 🔧 **Improved UX**: Visual timer appears by default for better usability
+- 📋 **Interface**: Users can disable timer if they want a cleaner interface
+
+### Version 1.4.5
+- 🔧 **Default Configuration**: "Auto Start" now comes unchecked by default
+- 🔧 **Interface**: "Show Floating Menu" now comes disabled by default
+- 🔧 **Improved UX**: More discreet extension by default, requiring manual activation
+- 📋 **Visual Information**: Floating menu status indicator in local interface
 
 ## License
 

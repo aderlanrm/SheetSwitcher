@@ -1,6 +1,6 @@
 # Extensión SheetSwitcher para Qlik Sense
 
-**Versión:** 1.4.6  
+**Versión:** 1.4.7  
 **Autor:** Aderlan | bideaz.in  
 **Licencia:** MIT
 
@@ -68,6 +68,7 @@ La extensión **SheetSwitcher** permite cambiar automáticamente entre hojas en 
   - Temporizador minimalista cuando está minimizado
   - Interfaz discreta que inicia minimizada
   - Cursor pointer para mejor usabilidad
+  - 🌍 **Soporte Multiidioma:** Interfaz automática en Portugués, Inglés o Español basada en la configuración de idioma de Qlik Sense
 
 - 🔄 **Navegación:**
   - Cambio automático de hojas (modo hojas)
@@ -149,6 +150,25 @@ git clone https://github.com/aderlanrm/SheetSwitcher.git
 ## Contribución
 
 ¡Las contribuciones son bienvenidas! Siéntete libre de abrir issues o enviar pull requests.
+
+## Historial de Versiones
+
+### Versión 1.4.7
+- 🌍 **Soporte Multiidioma**: Interfaz automática en Portugués, Inglés o Español
+- 🔧 **Detección de Idioma**: Detecta automáticamente el idioma configurado en Qlik Sense
+- 🌐 **Traducción Completa**: Todas las cadenas de la interfaz traducidas en tres idiomas
+- 📋 **API Qlik Sense**: Utiliza `getLocaleInfo()` para detectar configuración de locale
+
+### Versión 1.4.6
+- 🔧 **Configuración Predeterminada**: "Mostrar Timer" ahora viene habilitado por defecto
+- 🔧 **UX Mejorada**: Timer visual aparece por defecto para mejor usabilidad
+- 📋 **Interfaz**: Los usuarios pueden deshabilitar el timer si desean una interfaz más limpia
+
+### Versión 1.4.5
+- 🔧 **Configuración Predeterminada**: "Iniciar Automáticamente" ahora viene desmarcado por defecto
+- 🔧 **Interfaz**: "Mostrar Menú Flotante" ahora viene deshabilitado por defecto
+- 🔧 **UX Mejorada**: Extensión más discreta por defecto, requiriendo activación manual
+- 📋 **Información Visual**: Indicador de estado del menú flotante en la interfaz local
 
 ## Licencia
 

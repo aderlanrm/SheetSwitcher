@@ -14,6 +14,7 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (pas
 - **Tela Cheia via F11**: Simula a tecla F11 para ativar modo tela cheia
 - **Interface Minimalista**: Timer compacto que inicia minimizado e pode ser arrastado
 - **Personalização Visual**: Estilos customizáveis para diferentes elementos
+- **Suporte Multilíngue**: Interface automática em Português, Inglês ou Espanhol baseada na configuração do Qlik Sense
 
 ## Instalação
 
@@ -67,7 +68,13 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (pas
 
 ## Versão
 
-Versão atual: 1.4.6
+Versão atual: 1.4.7
+
+### Changelog v1.4.7
+- 🌍 **Suporte Multilíngue**: Interface automática em Português, Inglês ou Espanhol
+- 🔧 **Detecção de Idioma**: Detecta automaticamente o idioma configurado no Qlik Sense
+- 🌐 **Tradução Completa**: Todas as strings da interface traduzidas nos três idiomas
+- 📋 **API Qlik Sense**: Utiliza `getLocaleInfo()` para detectar configuração de locale
 
 ### Changelog v1.4.6
 - 🔧 **Configuração padrão**: "Exibir Timer" agora vem habilitado por padrão

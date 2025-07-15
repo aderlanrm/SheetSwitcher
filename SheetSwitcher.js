@@ -7,7 +7,277 @@ define([
   $("<style>").html(cssContent).appendTo("head");
   // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
   var EXTENSION_NAME = "SheetSwitcher";
-  var EXTENSION_VERSION = "1.4.6";  // Configuração global 
+  var EXTENSION_VERSION = "1.4.7";
+
+  // Sistema de traduções para múltiplos idiomas
+  var translations = {
+    'pt': { // Português
+      configTitle: 'Configurações',
+      interval: 'Intervalo (segundos)',
+      fullscreen: 'Tela cheia (F11)',
+      autoStart: 'Iniciar automaticamente',
+      clickAnimator: 'Clicar botões animator',
+      showTimer: 'Exibir Timer',
+      navigationLink: 'Link de Navegação',
+      linkInfo: 'Configure um link para navegação automática. Se nenhum link for configurado, a navegação será entre pastas locais.',
+      linkUrl: 'Link URL',
+      styles: 'Estilos',
+      instance: 'Instância',
+      fontObject: 'Fonte (Objeto)',
+      colorObject: 'Cor do texto (Objeto)',
+      backgroundObject: 'Fundo (Objeto)',
+      box: 'Caixa',
+      fontBox: 'Fonte (Caixa)',
+      colorBox: 'Cor do texto (Caixa)',
+      backgroundBox: 'Fundo (Caixa)',
+      title: 'Título',
+      fontTitle: 'Fonte (Título)',
+      colorTitle: 'Cor do texto (Título)',
+      backgroundTitle: 'Fundo (Título)',
+      timer: 'Timer',
+      start: 'Iniciar',
+      stop: 'Parar',
+      link: 'Link',
+      sheet: 'Pasta',
+      loadLink: 'carregar link',
+      nextPage: 'próxima página',
+      timeConfigured: 'Tempo configurado',
+      seconds: 'segundos',
+      mode: 'Modo',
+      localNavigation: 'navegação entre pastas locais',
+      linkNavigation: 'navegação para link configurado',
+      sameTabMode: 'Modo: navegação na mesma aba para o link configurado',
+      usingF11: 'Usando simulação F11 para fullscreen',
+      runningIframe: 'Executando em iframe',
+      clickingAnimator: 'Clicando em botões animator ao iniciar',
+      timerHidden: 'Timer oculto',
+      timerVisible: 'Timer visível',
+      exitingFullscreen: 'saindo fullscreen',
+      navigating: 'navegando'
+    },
+    'en': { // English
+      configTitle: 'Settings',
+      interval: 'Interval (seconds)',
+      fullscreen: 'Fullscreen (F11)',
+      autoStart: 'Auto start',
+      clickAnimator: 'Click animator buttons',
+      showTimer: 'Show Timer',
+      navigationLink: 'Navigation Link',
+      linkInfo: 'Set up a link for automatic navigation. If no link is configured, navigation will be between local sheets.',
+      linkUrl: 'Link URL',
+      styles: 'Styles',
+      instance: 'Instance',
+      fontObject: 'Font (Object)',
+      colorObject: 'Text color (Object)',
+      backgroundObject: 'Background (Object)',
+      box: 'Box',
+      fontBox: 'Font (Box)',
+      colorBox: 'Text color (Box)',
+      backgroundBox: 'Background (Box)',
+      title: 'Title',
+      fontTitle: 'Font (Title)',
+      colorTitle: 'Text color (Title)',
+      backgroundTitle: 'Background (Title)',
+      timer: 'Timer',
+      start: 'Start',
+      stop: 'Stop',
+      link: 'Link',
+      sheet: 'Sheet',
+      loadLink: 'load link',
+      nextPage: 'next page',
+      timeConfigured: 'Time configured',
+      seconds: 'seconds',
+      mode: 'Mode',
+      localNavigation: 'navigation between local sheets',
+      linkNavigation: 'navigation to configured link',
+      sameTabMode: 'Mode: navigation in same tab to configured link',
+      usingF11: 'Using F11 simulation for fullscreen',
+      runningIframe: 'Running in iframe',
+      clickingAnimator: 'Clicking animator buttons on start',
+      timerHidden: 'Timer hidden',
+      timerVisible: 'Timer visible',
+      exitingFullscreen: 'exiting fullscreen',
+      navigating: 'navigating'
+    },
+    'es': { // Español
+      configTitle: 'Configuración',
+      interval: 'Intervalo (segundos)',
+      fullscreen: 'Pantalla completa (F11)',
+      autoStart: 'Iniciar automáticamente',
+      clickAnimator: 'Hacer clic en botones animator',
+      showTimer: 'Mostrar Timer',
+      navigationLink: 'Enlace de Navegación',
+      linkInfo: 'Configure un enlace para navegación automática. Si no se configura ningún enlace, la navegación será entre hojas locales.',
+      linkUrl: 'Enlace URL',
+      styles: 'Estilos',
+      instance: 'Instancia',
+      fontObject: 'Fuente (Objeto)',
+      colorObject: 'Color del texto (Objeto)',
+      backgroundObject: 'Fondo (Objeto)',
+      box: 'Caja',
+      fontBox: 'Fuente (Caja)',
+      colorBox: 'Color del texto (Caja)',
+      backgroundBox: 'Fondo (Caja)',
+      title: 'Título',
+      fontTitle: 'Fuente (Título)',
+      colorTitle: 'Color del texto (Título)',
+      backgroundTitle: 'Fondo (Título)',
+      timer: 'Timer',
+      start: 'Iniciar',
+      stop: 'Parar',
+      link: 'Enlace',
+      sheet: 'Hoja',
+      loadLink: 'cargar enlace',
+      nextPage: 'siguiente página',
+      timeConfigured: 'Tiempo configurado',
+      seconds: 'segundos',
+      mode: 'Modo',
+      localNavigation: 'navegación entre hojas locales',
+      linkNavigation: 'navegación al enlace configurado',
+      sameTabMode: 'Modo: navegación en la misma pestaña al enlace configurado',
+      usingF11: 'Usando simulación F11 para pantalla completa',
+      runningIframe: 'Ejecutando en iframe',
+      clickingAnimator: 'Haciendo clic en botones animator al iniciar',
+      timerHidden: 'Timer oculto',
+      timerVisible: 'Timer visible',
+      exitingFullscreen: 'saliendo de pantalla completa',
+      navigating: 'navegando'
+    }
+  };
+
+  // Idioma atual detectado (será definido quando a API do Qlik for chamada)
+  var currentLanguage = 'pt'; // Padrão português
+
+  // Função para detectar o idioma do Qlik Sense
+  function detectQlikLanguage() {
+    return new Promise(function(resolve) {
+      try {
+        // Obtém o app atual e informações de locale
+        var app = qlik.currApp();
+        if (app && app.getLocaleInfo) {
+          app.getLocaleInfo().then(function(localeInfo) {
+            console.log('SheetSwitcher: Locale info obtido:', localeInfo);
+            
+            // Tenta detectar idioma através dos nomes dos meses
+            if (localeInfo && localeInfo.qCalendarStrings && localeInfo.qCalendarStrings.qLongMonthNames) {
+              var monthNames = localeInfo.qCalendarStrings.qLongMonthNames;
+              var firstMonth = monthNames[0].toLowerCase();
+              
+              // Detecta idioma baseado no primeiro mês
+              if (firstMonth === 'january' || firstMonth === 'jan') {
+                currentLanguage = 'en';
+              } else if (firstMonth === 'enero' || firstMonth === 'ene') {
+                currentLanguage = 'es';
+              } else if (firstMonth === 'janeiro' || firstMonth === 'jan' || firstMonth.indexOf('jan') === 0) {
+                currentLanguage = 'pt';
+              } else {
+                // Fallback para inglês se não conseguir detectar
+                currentLanguage = 'en';
+              }
+              
+              console.log('SheetSwitcher: Idioma detectado:', currentLanguage, 'baseado no mês:', firstMonth);
+            } else {
+              console.log('SheetSwitcher: Não foi possível detectar idioma, usando padrão português');
+              currentLanguage = 'pt';
+            }
+            
+            resolve(currentLanguage);
+          }).catch(function(error) {
+            console.log('SheetSwitcher: Erro ao obter locale info:', error);
+            currentLanguage = 'pt';
+            resolve(currentLanguage);
+          });
+        } else {
+          console.log('SheetSwitcher: API getLocaleInfo não disponível, usando padrão português');
+          currentLanguage = 'pt';
+          resolve(currentLanguage);
+        }
+      } catch (error) {
+        console.log('SheetSwitcher: Erro na detecção de idioma:', error);
+        currentLanguage = 'pt';
+        resolve(currentLanguage);
+      }
+    });
+  }
+
+  // Função para obter texto traduzido
+  function getText(key) {
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+      return translations[currentLanguage][key];
+    }
+    // Fallback para português se a chave não existir no idioma atual
+    if (translations['pt'] && translations['pt'][key]) {
+      return translations['pt'][key];
+    }
+    // Se não encontrar nem em português, retorna a chave
+    return key;
+  }
+
+  // Função para atualizar labels do painel de propriedades
+  function updatePropertyLabels(definition) {
+    if (!definition || !definition.items) return;
+    
+    try {
+      var items = definition.items;
+      
+      // Atualiza labels principais
+      if (items.Configuracoes) {
+        items.Configuracoes.label = getText('configTitle');
+        if (items.Configuracoes.items) {
+          if (items.Configuracoes.items.tempo) items.Configuracoes.items.tempo.label = getText('interval');
+          if (items.Configuracoes.items.fullscreen) items.Configuracoes.items.fullscreen.label = getText('fullscreen');
+          if (items.Configuracoes.items.autoStartAlways) items.Configuracoes.items.autoStartAlways.label = getText('autoStart');
+          if (items.Configuracoes.items.clickAnimatorButtons) items.Configuracoes.items.clickAnimatorButtons.label = getText('clickAnimator');
+          if (items.Configuracoes.items.showTimer) items.Configuracoes.items.showTimer.label = getText('showTimer');
+        }
+      }
+      
+      if (items.Links) {
+        items.Links.label = getText('navigationLink');
+        if (items.Links.items) {
+          if (items.Links.items.linksInfo) items.Links.items.linksInfo.label = getText('linkInfo');
+          if (items.Links.items.link) items.Links.items.link.label = getText('linkUrl');
+        }
+      }
+      
+      if (items.Estilos) {
+        items.Estilos.label = getText('styles');
+        if (items.Estilos.items) {
+          if (items.Estilos.items.instance) {
+            items.Estilos.items.instance.label = getText('instance');
+            var instItems = items.Estilos.items.instance.items;
+            if (instItems) {
+              if (instItems.fontSize) instItems.fontSize.label = getText('fontObject');
+              if (instItems.color) instItems.color.label = getText('colorObject');
+              if (instItems.background) instItems.background.label = getText('backgroundObject');
+            }
+          }
+          if (items.Estilos.items.container) {
+            items.Estilos.items.container.label = getText('box');
+            var contItems = items.Estilos.items.container.items;
+            if (contItems) {
+              if (contItems.fontSize) contItems.fontSize.label = getText('fontBox');
+              if (contItems.color) contItems.color.label = getText('colorBox');
+              if (contItems.background) contItems.background.label = getText('backgroundBox');
+            }
+          }
+          if (items.Estilos.items.header) {
+            items.Estilos.items.header.label = getText('title');
+            var headerItems = items.Estilos.items.header.items;
+            if (headerItems) {
+              if (headerItems.fontSize) headerItems.fontSize.label = getText('fontTitle');
+              if (headerItems.color) headerItems.color.label = getText('colorTitle');
+              if (headerItems.background) headerItems.background.label = getText('backgroundTitle');
+            }
+          }
+        }
+      }
+      
+      console.log('SheetSwitcher: Labels do painel de propriedades atualizados para:', currentLanguage);
+    } catch (error) {
+      console.log('SheetSwitcher: Erro ao atualizar labels:', error);
+    }
+  }  // Configuração global 
   if (!window.sheetSwitcherConfig) {
     window.sheetSwitcherConfig = {
       isPlaying: false,
@@ -389,23 +659,23 @@ define([
       function() { $(this).css('background-color', cfg.styles.header.background); }
     );    // Título sempre com a mesma cor
     $('#sheetSwitcherTitle')
-      .text(cfg.minimized ? formatTime(cfg.remainingTime) : 'Timer')
+      .text(cfg.minimized ? formatTime(cfg.remainingTime) : getText('timer'))
       .css({
         'color': cfg.styles.header.color,
         'font-size': cfg.styles.header.fontSize,
         'font-weight': 'bold'
       });      // Conteúdo interno
-    var btnText = cfg.isPlaying ? 'Parar' : 'Iniciar';
-    var modoAtual = cfg.link ? ' (Link)' : ' (Pasta)';
+    var btnText = cfg.isPlaying ? getText('stop') : getText('start');
+    var modoAtual = cfg.link ? ' (' + getText('link') + ')' : ' (' + getText('sheet') + ')';
     var proximoTexto = cfg.link ? 
-      'carregar link' : 'próxima página';
+      getText('loadLink') : getText('nextPage');
     
     // Adiciona indicadores de estado especiais
     var estadoEspecial = '';
     if (cfg.isExitingFullscreen) {
-      estadoEspecial = ' <small style="color:orange;">[saindo fullscreen]</small>';
+      estadoEspecial = ' <small style="color:orange;">[' + getText('exitingFullscreen') + ']</small>';
     } else if (cfg.isNavigating) {
-      estadoEspecial = ' <small style="color:blue;">[navegando]</small>';
+      estadoEspecial = ' <small style="color:blue;">[' + getText('navigating') + ']</small>';
     }
     
     var contentHtml = ''
@@ -452,7 +722,7 @@ define([
       component: 'accordion',
       items: {
         Configuracoes: {
-          label: 'Configurações',
+          label: 'Configurações', // O Qlik Sense atualizará via API após detectar idioma
           type: 'items',
           items: {
             tempo: {
@@ -585,6 +855,22 @@ define([
       }
     },
     paint: function ($element, layout) {
+      // Detecta idioma do Qlik Sense (apenas uma vez)
+      if (!window.sheetSwitcherLanguageDetected) {
+        var self = this;
+        detectQlikLanguage().then(function(language) {
+          currentLanguage = language;
+          window.sheetSwitcherLanguageDetected = true;
+          console.log('SheetSwitcher: Idioma configurado para:', currentLanguage);
+          
+          // Atualiza labels do painel de propriedades
+          updatePropertyLabels(self.definition);
+          
+          // Re-renderiza após detectar idioma
+          renderGlobal();
+        });
+      }
+
       // Atualiza configurações
       var cfg = window.sheetSwitcherConfig;
       cfg.fullscreen = layout.props.fullscreen !== false;  // default true
@@ -639,46 +925,46 @@ define([
       // Verifica auto-start para links
       checkAutoStart();
       
-      // Exibe mensagem local
+      // Exibe mensagem local (com traduções)
       var modoNavegacao = cfg.link ? 
-        'navegação para link configurado: ' + cfg.link : 
-        'navegação entre pastas locais';
+        getText('linkNavigation') + ': ' + cfg.link : 
+        getText('localNavigation');
       
       // Informações sobre abas (apenas se há link)
       var infoAbas = '';
       if (cfg.link) {
-        infoAbas = '<br>Modo: navegação na mesma aba para o link configurado';
+        infoAbas = '<br>' + getText('mode') + ': ' + getText('sameTabMode');
       }
       
       // Informações sobre contexto (iframe, fullscreen)
       var infoContexto = '';
       if (cfg.fullscreen) {
-        infoContexto = '<br><small style="color:blue;">ℹ️ Usando simulação F11 para fullscreen</small>';
+        infoContexto = '<br><small style="color:blue;">ℹ️ ' + getText('usingF11') + '</small>';
         if (isInIframe()) {
-          infoContexto += '<br><small style="color:blue;">ℹ️ Executando em iframe</small>';
+          infoContexto += '<br><small style="color:blue;">ℹ️ ' + getText('runningIframe') + '</small>';
         }
       }
       
       // Informações sobre botões animator
       var infoAnimator = '';
       if (cfg.clickAnimatorButtons) {
-        infoAnimator = '<br><small style="color:green;">ℹ️ Clicando em botões animator ao iniciar</small>';
+        infoAnimator = '<br><small style="color:green;">ℹ️ ' + getText('clickingAnimator') + '</small>';
       }
       
       // Informações sobre timer
       var infoMenu = '';
       if (!cfg.showTimer) {
-        infoMenu = '<br><small style="color:orange;">ℹ️ Timer oculto</small>';
+        infoMenu = '<br><small style="color:orange;">ℹ️ ' + getText('timerHidden') + '</small>';
       } else {
-        infoMenu = '<br><small style="color:blue;">ℹ️ Timer visível</small>';
+        infoMenu = '<br><small style="color:blue;">ℹ️ ' + getText('timerVisible') + '</small>';
       }
       
       var localHtml = '<div style="padding:10px; ' +
         'font-size:' + st.instance.fontSize + '; ' +
         'color:' + st.instance.color + '; ' +
         'background:' + st.instance.background + ';">' +
-        'Tempo configurado: ' + cfg.tempo + ' segundos.<br>' +
-        'Modo: ' + modoNavegacao + '.' + infoAbas + infoContexto + infoAnimator + infoMenu +
+        getText('timeConfigured') + ': ' + cfg.tempo + ' ' + getText('seconds') + '.<br>' +
+        getText('mode') + ': ' + modoNavegacao + '.' + infoAbas + infoContexto + infoAnimator + infoMenu +
         '</div>';
       $element.html(localHtml);
       return qlik.Promise.resolve();
