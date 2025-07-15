@@ -1,6 +1,6 @@
 # SheetSwitcher Qlik Sense Extension
 
-**Version:** 1.4.4  
+**Version:** 1.4.6  
 **Author:** Aderlan | bideaz.in  
 **License:** MIT
 

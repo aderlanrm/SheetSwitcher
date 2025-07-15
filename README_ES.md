@@ -1,6 +1,6 @@
 # Extensión SheetSwitcher para Qlik Sense
 
-**Versión:** 1.4.4  
+**Versión:** 1.4.6  
 **Autor:** Aderlan | bideaz.in  
 **Licencia:** MIT
 

@@ -2,7 +2,7 @@
 	"name": "SheetSwitcher",
 	"description": "Alterna entre abas de forma automática ou entre links configurados",
 	"type": "visualization",
-	"version": "1.4.4",
+	"version": "1.4.6",
 	"icon": "extension",
 	"author": "Aderlan | bideaz.in",
 	"homepage": "https://www.bideaz.com.br",

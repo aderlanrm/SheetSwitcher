@@ -7,7 +7,7 @@ define([
   $("<style>").html(cssContent).appendTo("head");
   // Versão da extensão (deve ser atualizada quando a versão no qext for alterada)
   var EXTENSION_NAME = "SheetSwitcher";
-  var EXTENSION_VERSION = "1.4.4";  // Configuração global 
+  var EXTENSION_VERSION = "1.4.6";  // Configuração global 
   if (!window.sheetSwitcherConfig) {
     window.sheetSwitcherConfig = {
       isPlaying: false,
@@ -18,8 +18,9 @@ define([
       lastUpdatedSheetId: null,
       minimized: true, // Inicia minimizada por padrão
       link: '', // Um único link ao invés de array
-      autoStartAlways: true, // Nova configuração para iniciar automaticamente
+      autoStartAlways: false, // Nova configuração para iniciar automaticamente
       clickAnimatorButtons: false, // Nova configuração para clicar em botões animator
+      showTimer: true, // Nova configuração para exibir timer
       isTabActive: true, // Controla se esta aba está ativa
       pausedByNavigation: false, // Pausado devido à navegação para nova aba
       visibilitySetup: false, // Controla se os listeners já foram configurados
@@ -163,7 +164,9 @@ define([
         cfg.pausedByNavigation = false;
         startTimer(); // A verificação de fullscreen agora está dentro de startTimer
         cfg.minimized = true;
-        $('#sheetSwitcherGlobalContent').hide();
+        if (cfg.showTimer) {
+          $('#sheetSwitcherGlobalContent').hide();
+        }
         renderGlobal();
       }, 1000); // Delay de 1 segundo para garantir que a página carregou
     }
@@ -329,6 +332,15 @@ define([
   // Cria ou atualiza o container global
   function renderGlobal() {
     var cfg = window.sheetSwitcherConfig;
+    
+    // Se o timer está desabilitado, remove o container se existir e sai
+    if (!cfg.showTimer) {
+      if ($('#sheetSwitcherGlobalContainer').length) {
+        $('#sheetSwitcherGlobalContainer').remove();
+      }
+      return;
+    }
+    
     if (!$('#sheetSwitcherGlobalContainer').length) {
       var html = ''
         + '<div id="sheetSwitcherGlobalContainer" '  
@@ -416,7 +428,9 @@ define([
         startTimer(); // A verificação de fullscreen agora está dentro de startTimer
         // Minimiza ao iniciar
         cfg.minimized = true;
-        $('#sheetSwitcherGlobalContent').hide();
+        if (cfg.showTimer) {
+          $('#sheetSwitcherGlobalContent').hide();
+        }
       } else {
         cfg.isPlaying = false;
         clearInterval(cfg.timer);
@@ -457,13 +471,19 @@ define([
               ref: 'props.autoStartAlways',
               label: 'Iniciar automaticamente',
               type: 'boolean',
-              defaultValue: true
+              defaultValue: false
             },
             clickAnimatorButtons: {
               ref: 'props.clickAnimatorButtons',
               label: 'Clicar botões animator',
               type: 'boolean',
               defaultValue: false
+            },
+            showTimer: {
+              ref: 'props.showTimer',
+              label: 'Exibir Timer',
+              type: 'boolean',
+              defaultValue: true
             }
           }
         },
@@ -561,14 +581,16 @@ define([
               }
             }
           }
-        }      }
+        }
+      }
     },
     paint: function ($element, layout) {
       // Atualiza configurações
       var cfg = window.sheetSwitcherConfig;
       cfg.fullscreen = layout.props.fullscreen !== false;  // default true
-      cfg.autoStartAlways = layout.props.autoStartAlways !== false; // default true
+      cfg.autoStartAlways = layout.props.autoStartAlways === true; // default false
       cfg.clickAnimatorButtons = layout.props.clickAnimatorButtons === true; // default false
+      cfg.showTimer = layout.props.showTimer !== false; // default true
       
       // Processa link único
       cfg.link = (layout.props.link || '').trim();
@@ -602,8 +624,12 @@ define([
           clearInterval(cfg.timer);
           startTimer();
         }
-      }      // Renderiza global
-      renderGlobal();      // Inicializa controle de visibilidade (apenas uma vez)
+      }
+      
+      // Renderiza global
+      renderGlobal();
+      
+      // Inicializa controle de visibilidade (apenas uma vez)
       if (!cfg.visibilitySetup) {
         setupTabVisibilityControl();
         setupFullscreenListeners(); // Adiciona listeners de fullscreen
@@ -611,11 +637,14 @@ define([
       }
 
       // Verifica auto-start para links
-      checkAutoStart();      // Exibe mensagem local
+      checkAutoStart();
+      
+      // Exibe mensagem local
       var modoNavegacao = cfg.link ? 
         'navegação para link configurado: ' + cfg.link : 
         'navegação entre pastas locais';
-        // Informações sobre abas (apenas se há link)
+      
+      // Informações sobre abas (apenas se há link)
       var infoAbas = '';
       if (cfg.link) {
         infoAbas = '<br>Modo: navegação na mesma aba para o link configurado';
@@ -636,12 +665,20 @@ define([
         infoAnimator = '<br><small style="color:green;">ℹ️ Clicando em botões animator ao iniciar</small>';
       }
       
+      // Informações sobre timer
+      var infoMenu = '';
+      if (!cfg.showTimer) {
+        infoMenu = '<br><small style="color:orange;">ℹ️ Timer oculto</small>';
+      } else {
+        infoMenu = '<br><small style="color:blue;">ℹ️ Timer visível</small>';
+      }
+      
       var localHtml = '<div style="padding:10px; ' +
         'font-size:' + st.instance.fontSize + '; ' +
         'color:' + st.instance.color + '; ' +
         'background:' + st.instance.background + ';">' +
         'Tempo configurado: ' + cfg.tempo + ' segundos.<br>' +
-        'Modo: ' + modoNavegacao + '.' + infoAbas + infoContexto + infoAnimator +
+        'Modo: ' + modoNavegacao + '.' + infoAbas + infoContexto + infoAnimator + infoMenu +
         '</div>';
       $element.html(localHtml);
       return qlik.Promise.resolve();

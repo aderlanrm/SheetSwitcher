@@ -67,7 +67,18 @@ Extensão para Qlik Sense que permite a alternância automática entre abas (pas
 
 ## Versão
 
-Versão atual: 1.4.4
+Versão atual: 1.4.6
+
+### Changelog v1.4.6
+- 🔧 **Configuração padrão**: "Exibir Timer" agora vem habilitado por padrão
+- 🔧 **UX melhorada**: Timer visual aparece por padrão para melhor usabilidade
+- 📋 **Interface**: Usuários podem desabilitar o timer se desejarem uma interface mais limpa
+
+### Changelog v1.4.5
+- 🔧 **Configuração padrão**: "Iniciar automaticamente" agora vem desmarcado por padrão
+- 🔧 **Interface**: "Exibir menu flutuante" agora vem desabilitado por padrão
+- 🔧 **UX melhorada**: Extensão mais discreta por padrão, requerendo ativação manual das funcionalidades
+- 📋 **Informações visuais**: Indicador de status do menu flutuante na interface local
 
 ### Changelog v1.4.4
 - ✨ **Nova funcionalidade**: Opção para clicar automaticamente em botões animator
